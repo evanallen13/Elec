@@ -1,0 +1,44 @@
+name: Build Ubuntu Executable
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build-ubuntu:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Linux executable
+        run: npm run dist
+
+      - name: Upload AppImage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Elec-AppImage
+          path: dist/*.AppImage
+
+      - name: Upload deb artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Elec-deb
+          path: dist/*.deb

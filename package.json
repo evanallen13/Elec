@@ -2,6 +2,7 @@
   "name": "elec",
   "version": "1.0.0",
   "description": "Hello World Electron App",
+  "author": "evanallen13 <evanallen13>",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
